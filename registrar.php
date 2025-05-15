@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <!-- basic -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <!-- mobile metas -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+   <!-- site metas -->
+   <title>limelight</title>
+   <meta name="keywords" content="">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <!-- bootstrap css -->
+   <link rel="stylesheet" href="css/bootstrap.min.css">
+   <!-- style css -->
+   <link rel="stylesheet" href="css/style.css">
+   <!-- Responsive-->
+   <link rel="stylesheet" href="css/responsive.css">
+   <!-- fevicon -->
+   <link rel="icon" href="images/fevicon.png" type="image/gif" />
+   <!-- Scrollbar Custom CSS -->
+   <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+   <!-- Tweaks for older IEs-->
+   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+   <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<!-- body -->
+
+<body class="main-layout in_page">
+   <!-- loader  -->
+   <div class="loader_bg">
+      <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+   </div>
+   <!-- end loader -->
+   <header>
+   <?php session_start();
+      header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+      header("Pragma: no-cache");
+      if (isset($_SESSION['user_id'])) {
+         include 'header2.php';
+      } else {
+         include 'header.php';
+      } ?>
+   </header>
+   <!-- end header inner -->
+   <!-- end header -->
+   <!--  service -->
+
+   <div class="signupFrm">
+      <form action="Backend/registrar.php"id="registroForm" onsubmit="return validarFormulario()" method="POST" class="form">
+         <h1 class="title">Sign up</h1>
+
+         <div class="inputContainer">
+            <input type="email" name="email" required class="input" placeholder="correo@example.com">
+            <label class="label">Email</label>
+         </div>
+
+         <div class="inputContainer">
+            <input type="text" name="username" required class="input" placeholder="Nombre de usuario">
+            <label class="label">Username</label>
+         </div>
+
+         <div class="inputContainer">
+            <input type="password" name="password" required class="input" placeholder="Contraseña">
+            <label class="label">Password</label>
+         </div>
+
+         <div class="inputContainer">
+            <input type="tel" name="tel" required pattern="[0-9]{10}" inputmode="numeric" maxlength="10" class="input" placeholder="1234567890"> <label class="label">Teléfono</label>
+         </div>
+
+         <p id="error" style="color: red;"></p>
+         \
+
+         <input type="submit" class="submitBtn" value="Sign up">
+      </form>
+   </div>
+
+   <script>
+      function validarFormulario() {
+         let username = document.querySelector("#registroForm input[name='username']").value.trim();
+         let email = document.querySelector("#registroForm input[name='email']").value.trim();
+         let telefono = document.querySelector("#registroForm input[name='tel']").value.trim();
+         let errorMensaje = document.getElementById("error");
+
+         let regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|mx|net|org|edu|gov)$/;
+         let regexTelefono = /^[0-9]{10}$/;
+         let regexUsername = /^[a-z0-9_]+$/;
+
+         if (!regexEmail.test(email)) {
+            errorMensaje.innerText = "El correo debe contener '@' y un dominio válido.";
+            return false;
+         }
+
+         if (!regexTelefono.test(telefono)) {
+            errorMensaje.innerText = "El teléfono debe tener exactamente 10 dígitos.";
+            return false;
+         }
+
+         if (!regexUsername.test(username)) {
+            errorMensaje.innerText = "El usuario solo puede contener letras minúsculas, números y '_'.";
+            return false;
+         }
+
+         errorMensaje.innerText = "";
+         return true;
+      }
+   </script>
+
+
+
+
+   <!-- end service -->
+   <!--  footer -->
+   <footer>
+      <div class="footer">
+         <div class="container">
+            <div class="row">
+               <div class=" col-md-3 col-sm-6">
+                  <ul class="social_icon">
+                     <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                     <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                     <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                     <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                  </ul>
+                  <p class="variat pad_roght2">There are many variat
+                     ions of passages of L
+                     orem Ipsum available
+                     , but the majority h
+                     ave suffered altera
+                     tion in some form, by
+                  </p>
+               </div>
+               <div class=" col-md-3 col-sm-6">
+                  <h3>LET US HELP YOU </h3>
+                  <p class="variat pad_roght2">There are many variat
+                     ions of passages of L
+                     orem Ipsum available
+                     , but the majority h
+                     ave suffered altera
+                     tion in some form, by
+                  </p>
+               </div>
+               <div class="col-md-3 col-sm-6">
+                  <h3>INFORMATION</h3>
+                  <ul class="link_menu">
+                     <li><a href="index.html">Home</a></li>
+                     <li><a href="about.html"> About</a></li>
+                     <li><a href="service.html">Services</a></li>
+                     <li><a href="gallery.html">Gallery</a></li>
+                     <li><a href="testimonial.html">Testimonial</a></li>
+                     <li><a href="contact.html">Contact Us</a></li>
+                  </ul>
+               </div>
+               <div class="col-md-3 col-sm-6">
+                  <h3>OUR Design</h3>
+                  <p class="variat">There are many variat
+                     ions of passages of L
+                     orem Ipsum available
+                     , but the majority h
+                     ave suffered altera
+                     tion in some form, by
+                  </p>
+               </div>
+               <div class="col-md-6 offset-md-6">
+                  <form id="hkh" class="bottom_form">
+                     <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
+                     <button class="sub_btn">subscribe</button>
+                  </form>
+               </div>
+            </div>
+         </div>
+         <div class="copyright">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-10 offset-md-1">
+                     <p>© 2019 All Rights Reserved. Design by <a href="https://html.design/"> Free Html Templates</a></p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- end footer -->
+   <!-- Javascript files-->
+   <script src="js/jquery.min.js"></script>
+   <script src="js/bootstrap.bundle.min.js"></script>
+   <script src="js/jquery-3.0.0.min.js"></script>
+   <!-- sidebar -->
+   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+   <script src="js/custom.js"></script>
+</body>
+
+</html>
